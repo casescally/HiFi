@@ -1,0 +1,9 @@
+.profilePicture {
+    max-width: 100px;
+}
+
+.songSection {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
