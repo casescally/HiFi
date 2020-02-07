@@ -61,7 +61,7 @@ export default props => {
 
     return (
         <form className="songForm">
-            <h2 className="songForm__title">{editMode ? "Update Song" : "Submit Song"}</h2>
+            <h2 className="songForm__title">{editMode ? "Update Song" : "Upload Song"}</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="name">Song name: </label>
@@ -87,18 +87,8 @@ export default props => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="songId">Song: </label>
-                    <select name="songId" className="form-control"
-                        proptype="int"
-                        value={song.songId}
-                        onChange={handleControlledInputChange}>
-
-                        <option value="0">Select a song</option>
-                        {users.map(s => (
-                            <option key={s.id} value={s.id}>
-                                {s.name}
-                            </option>
-                        ))}
-                    </select>
+                    <input type="file" name="song"></input>
+                    
                 </div>
             </fieldset>
             <fieldset>

@@ -15,6 +15,12 @@ export default (props) => {
     return (
         <section className="individualSong">
             <h3 className="song__name">{song.name}</h3>
+
+            <audio controls>
+                <source src={`http://localhost:8080/${song.url}`} type="audio/mpeg" />
+                Your browser does not support the audio element.
+            </audio>
+
             <div className="song__user">{user.name}</div>
             <button onClick={
                 () => {

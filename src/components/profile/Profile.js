@@ -11,28 +11,25 @@ export default (props) => {
 
     const { users } = useContext(UserContext)
 
+    const chosenSongId = parseInt(props.match.params.songId, 10)
+
+    const song = songs.find(s => s.id === chosenSongId) || {}
+
+    const currentUsersProfile = users.find(u => u.id === parseInt(localStorage.getItem("currentUser"))) || {}
+
     const userSongs = songs.filter(song => {
         return song.userId === parseInt(localStorage.getItem("currentUser"))
     })
 
-    const profileUsername = () => {
-
-    const currentUserObject = users.find(user => {
-        return user.id === parseInt(localStorage.getItem("currentUser"))
-    })
-    
-    return currentUserObject
-}
-
-    console.log(profileUsername())
-
-    return (  
+    return (
         <div className="songs">
-            <h1>Current User</h1>
+
+            {<h1>{currentUsersProfile.name}</h1>}
 
             <article className="profileSongList">
             {userSongs.map(song => <Song key={song.id} song={song} {...props} />)}
             </article>
+            
         </div> 
     )
 }
