@@ -5,9 +5,11 @@
     font-size: 20px;
     border: solid black 3px;
     padding: 1%;
+    align-items: center;
 }
 
 .navbar__item {
     flex-basis: 20%;
     list-style-type: none;
+    margin: 1%;
 }

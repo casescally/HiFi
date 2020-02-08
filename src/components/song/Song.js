@@ -11,17 +11,20 @@ export default ({ song }) => (
                 {song.name}
             </Link>
 
-            <audio controls>
-                <source src={`http://localhost:8080/${song.url}`} type="audio/mpeg" />
-                Your browser does not support the audio element.
-            </audio>
 
             <div class="uploaderInfo">
 
-                <img className="profilePicture" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></img>
-
                 <h3>uploaders name</h3>
 
+                <button onClick={function(){
+                    const player = document.getElementById("songPlayer")
+                    const audioPlayer = player.parentElement
+                    if (player.getAttribute('src') === "http://localhost:8080/undefined"){
+                        player.src = `http://localhost:8080/${song.url}`
+                    audioPlayer.load()
+                    }
+
+                    }}>Play</button>
             </div>
         </h3>
     </section>

@@ -1,12 +1,30 @@
 .profilePicture {
-    max-width: 100px;
+    max-width: 50px;
 }
 
 .songSection {
     display: flex;
     justify-content: space-between;
-    flex-direction: column;
+    flex-direction: row;
     border: solid black 3px;
     margin: 1%;
     padding: 1%;
+}
+
+.player {
+    display: flex;
+    justify-content: center;
+    flex-direction: row; 
+    border: solid black 3px;
+    margin: 1%;
+    padding: 1%;
+    align-items: center;
+}
+
+.background {
+    display: flex;
+    flex-direction: row;
+    background-color: grey;
+    height: 200px;
+    align-items: center;
 }
