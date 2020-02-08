@@ -12,19 +12,20 @@ export default ({ song }) => (
             </Link>
 
 
-            <div class="uploaderInfo">
+            <div className="uploaderInfo">
 
                 <h3>uploaders name</h3>
 
                 <button onClick={function(){
                     const player = document.getElementById("songPlayer")
                     const audioPlayer = player.parentElement
-                    if (player.getAttribute('src') === "http://localhost:8080/undefined"){
-                        player.src = `http://localhost:8080/${song.url}`
+                    player.src = `http://localhost:8080/${song.url}` 
                     audioPlayer.load()
-                    }
+                    }}>
+                        Play
 
-                    }}>Play</button>
+                </button>
+
             </div>
         </h3>
     </section>

@@ -15,7 +15,7 @@
     display: flex;
     justify-content: center;
     flex-direction: row; 
-    border: solid black 3px;
+    border: solid #003f3f 3px;
     margin: 1%;
     padding: 1%;
     align-items: center;
@@ -24,7 +24,7 @@
 .background {
     display: flex;
     flex-direction: row;
-    background-color: grey;
+    background-color:darkcyan;
     height: 200px;
     align-items: center;
 }
