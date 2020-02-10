@@ -4,7 +4,7 @@
 
 .songSection {
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     flex-direction: row;
     border: solid black 3px;
     margin: 1%;

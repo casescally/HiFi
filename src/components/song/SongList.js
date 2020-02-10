@@ -9,7 +9,7 @@ export default (props) => {
 
         return song.userId === parseInt(localStorage.getItem("currentUser"))
     })
-debugger
+
     return (  
         <div className="songs">
             <h1>Songs</h1>

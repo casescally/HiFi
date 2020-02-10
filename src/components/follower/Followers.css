@@ -1,0 +1,24 @@
+.friendList {
+    display: flex;
+    flex-wrap: wrap;    
+    flex-direction: column;
+    justify-content: space-between;
+}
+.friend {
+    flex-basis: 33%;
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid goldenrod;
+    color: white;
+}
+fieldset {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+}
+
+.freind__profilePicture {
+    background-color: cornflowerblue;
+    height: 100px;
+    width: 100px;
+}
+

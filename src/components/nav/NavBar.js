@@ -7,7 +7,7 @@ export default (props) => {
         <ul className="navbar">
 
             <li className="navbar__item discover">
-                <Link className="navbar__link" to="/discover">Discover</Link>
+                <Link className="navbar__link" to="/">Discover</Link>
             </li>
 
             <li className="navbar__item stream">
@@ -15,9 +15,9 @@ export default (props) => {
             </li>
 
             <li className="navbar__item stream">
-                <Link className="navbar__link" to="/">Profile</Link>
+                <Link className="navbar__link" to={`/users/${parseInt(localStorage.getItem("currentUser"))}`}>Profile</Link>
             </li>
-        
+
             <li className="navbar__item upload">
                 <button onClick={() => props.history.push("/songs/create")}>
                     Upload Song

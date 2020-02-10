@@ -1,42 +1,32 @@
 import React from "react";
 import { Route } from "react-router-dom";
-
 import { SongProvider } from "./song/SongProvider";
-
-import SongList from "./song/SongList";
-
-import Profile from "./profile/Profile";
-
-import SongForm from "./song/SongForm";
-
 import { UserProvider } from "./user/UserProvider"
-
-import SongDetails from "./song/SongDetails"
+import Profile from "./profile/Profile";
+import Discover from "./discover/Discover";
+import SongForm from "./song/SongForm";
+import SongDetails from "./song/SongDetails";
+import Stream from "./stream/Stream";
+import { FollowerProvider } from "./follower/FollowerProvider";
 
 export default props => {
     return (
         <>
             <SongProvider>
-                <UserProvider>   
-                <Route exact path="/" render={
-                            props => <Profile {...props} />
-                        } />                
-                </UserProvider>
-            </SongProvider>
-
-            <SongProvider>
-                <UserProvider>   
-                <Route exact path="songs/create" render={
-                            props => <SongForm {...props} />
-                        } />                
-                </UserProvider>
-            </SongProvider>
-
-            <SongProvider>
-                <UserProvider>
-                        <Route exact path="/songs" render={
-                            props => <SongList {...props} />
+                <FollowerProvider>
+                    <UserProvider>
+                        <Route exact path="/" render={
+                            props => <Discover {...props} />
                         } />
+
+                        <Route exact path="/users/:userId(\d+)" render={
+                            props => <Profile {...props} />
+                        } />
+
+                        <Route path="/stream" render={
+                            props => <Stream {...props} />
+                        } />
+
                         <Route exact path="/songs/create" render={
                             props => <SongForm {...props} />
                         } />
@@ -46,7 +36,8 @@ export default props => {
                         <Route path="/songs/edit/:songId(\d+)" render={
                             props => <SongForm {...props} />
                         } />
-                </UserProvider>
+                    </UserProvider>
+                </FollowerProvider>
             </SongProvider>
         </>
     );
