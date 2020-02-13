@@ -1,42 +1,64 @@
-import React, { useReducer } from "react"
+import React, { useContext } from "react"
 import "./Songs.css"
 import { Link } from "react-router-dom"
+import { LikeContext } from "../likes/LikesProvider"
 
-export default ({ song }) => (
 
-    <section className="songSection">
 
-        <button onClick={
-            function () {
-                const player = document.getElementById("songPlayer")
-                const audioPlayer = player.parentElement
-                player.src = `http://localhost:8080/${song.url}`
-                audioPlayer.load()
-            }}>Play
+
+export default ({ song }) => {
+    const { addLike } = useContext(LikeContext)
+
+    const constructNewLike = (currentSong) => {
+        addLike({
+            songId: currentSong,
+            userId: parseInt(localStorage.getItem("currentUser"))
+        })
+    }
+        return (
+
+            <section className="songSection">
+
+                <button onClick={
+                    function () {
+                        const player = document.getElementById("songPlayer")
+                        const audioPlayer = player.parentElement
+                        player.src = `http://localhost:8080/${song.url}`
+                        audioPlayer.load()
+                    }}>Play
         </button>
 
-        <h3>
+                <h3>
 
-            <Link to={`/users/${song.userId}`}>
-                {song.userId}
-            </Link>
+                    <Link to={`/users/${song.userId}`}>
+                        {song.userId}
+                    </Link>
 
-        </h3>
+                </h3>
 
-        <h3 className="song__name">
+                <h3 className="song__name">
 
-            <Link to={`/songs/${song.id}`}>
-                {song.name}
-            </Link>
+                    <Link to={`/songs/${song.id}`}>
+                        {song.name}
+                    </Link>
 
-            <div className="uploaderInfo">
+                    Plays: {song.playCount}
+                    Likes:
+            <button className="likeButton" value="Like" onClick={evt => {
+                        evt.preventDefault()
+                        constructNewLike(song.id)
+                    }
+                    }>Like</button>
 
-            </div>
+                    <div className="uploaderInfo">
 
-            <div className="songInfo">
-                {song.songDescription}
-            </div>
+                    </div>
 
-        </h3>
-    </section>
-)
+                    <div className="songInfo">
+                        {song.songDescription}
+                    </div>
+
+                </h3>
+            </section>
+        )
+    }

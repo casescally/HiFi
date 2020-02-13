@@ -8,8 +8,14 @@ import Follower from "../follower/Follower"
 import { LikeContext } from "../likes/LikesProvider"
 import Like from "../likes/Like"
 
+
 export default (props) => {
 
+
+// const { updateSongPlay } = useContext(SongContext)
+
+
+// }
     const { songs } = useContext(SongContext)
     const { users } = useContext(UserContext)
     const { followers } = useContext(FollowerContext)
@@ -19,19 +25,11 @@ export default (props) => {
     // const currentUsersProfile = users.find(u => u.id === parseInt(localStorage.getItem("currentUser"))) || {}
     const profilesArray = []
 
-    const createFollowButton = () => {
-        const btn = document.createElement("BUTTON")
-        const att = document.createAttribute("id")
-        att.value = "followButton"
-        btn.setAttribute("class", "follow")
-        document.body.appendChild(btn)
-    }
-
     if (chosenUserId !== parseInt(localStorage.getItem("currentUser"))) {
         let foundProfile = users.find(u => u.id === chosenUserId) || {}
         profilesArray.push(foundProfile)
 
-        createFollowButton()
+
 
     } else {
         let foundProfile = users.find(u => u.id === parseInt(localStorage.getItem("currentUser"))) || {}

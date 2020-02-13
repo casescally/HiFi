@@ -76,6 +76,7 @@ export default (props) => {
     useEffect(() => {
         // updateSongPosition()
         updateSongPosition(setSongPosition)
+        console.log(songPosition)
     }, [])
 
     useEffect(() => {

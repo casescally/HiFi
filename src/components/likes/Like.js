@@ -30,6 +30,8 @@ import { Link } from "react-router-dom"
                 {like.name}
             </Link>
 
+            Plays: {like.playCount}
+
             <div className="uploaderInfo">
 
             </div>

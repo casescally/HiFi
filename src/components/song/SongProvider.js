@@ -50,6 +50,17 @@ export const SongProvider = (props) => {
             .then(getSongs)
     }
 
+    const updateSongPlay = song => {
+        return fetch(`http://localhost:8088/songs/${song.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(song)
+        })
+            .then(getSongs)
+    }
+
     /*
         Load all songs when the component is mounted. Ensure that
         an empty array is the second argument to avoid infinite loop.
@@ -66,7 +77,7 @@ export const SongProvider = (props) => {
 
     return (
         <SongContext.Provider value={{
-            songs, addSong, deleteSong, updateSong
+            songs, addSong, deleteSong, updateSong, updateSongPlay
         }}>
             {props.children}
         </SongContext.Provider>
