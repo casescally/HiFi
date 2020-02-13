@@ -4,6 +4,9 @@ import Song from "../song/Song"
 import "../song/Songs.css"
 import { UserContext } from "../user/UserProvider"
 import { FollowerContext } from "../follower/FollowerProvider"
+import Follower from "../follower/Follower"
+import { LikeContext } from "../likes/LikesProvider"
+import Like from "../likes/Like"
 
 export default (props) => {
 
@@ -11,76 +14,107 @@ export default (props) => {
     const { users } = useContext(UserContext)
     const { followers } = useContext(FollowerContext)
     const chosenUserId = parseInt(props.match.params.userId, 10)
+    const { likes } = useContext(LikeContext)
     // const song = songs.find(s => s.id === chosenSongId) || {}
-    const currentUsersProfile = users.find(u => u.id === parseInt(localStorage.getItem("currentUser"))) || {}
+    // const currentUsersProfile = users.find(u => u.id === parseInt(localStorage.getItem("currentUser"))) || {}
     const profilesArray = []
+
+    const createFollowButton = () => {
+        const btn = document.createElement("BUTTON")
+        const att = document.createAttribute("id")
+        att.value = "followButton"
+        btn.setAttribute("class", "follow")
+        document.body.appendChild(btn)
+    }
 
     if (chosenUserId !== parseInt(localStorage.getItem("currentUser"))) {
         let foundProfile = users.find(u => u.id === chosenUserId) || {}
         profilesArray.push(foundProfile)
-        console.log(foundProfile)
+
+        createFollowButton()
+
     } else {
         let foundProfile = users.find(u => u.id === parseInt(localStorage.getItem("currentUser"))) || {}
         profilesArray.push(foundProfile)
-        console.log(foundProfile)
-    }
-    const currentProfile = profilesArray[0]
-    console.log(currentProfile)
-    // const userFollowers = followers.filter(follower => {
-    //     return follower.userId === parseInt(localStorage.getItem("currentUser"))
-    // })
 
-    const userSongs = songs.filter(song => {
-        return song.userId === parseInt(localStorage.getItem("currentUser"))
-    })
+    }
+
+    const currentProfile = profilesArray[0]
+    const likesRelationships = likes.filter(like => like.userId == currentProfile.id)
+    const currentUsersLikes = []
+
+    {
+        likesRelationships.forEach(rel => {
+
+            // Find this relationships's matching user object
+            const foundLike = songs.filter(
+                (singleSong) => {
+                    return rel.songId === singleSong.id
+                }
+            )[0]
+            //if page is reloaded and no likes are found
+            if (foundLike !== undefined) {
+                currentUsersLikes.push(foundLike)
+            }
+        })
+    }
+
+    const relationships = followers.filter(follower => follower.userId == currentProfile.id)
+    const currentUsersFollowers = []
+
+    {
+        relationships.forEach(rel => {
+
+            // Find this relationships's matching user object
+            const foundFollower = users.filter(
+                (singleUser) => {
+                    return rel.followerId === singleUser.id
+                }
+            )[0]
+
+            currentUsersFollowers.push(foundFollower)
+        })
+    }
 
     const currentUserSongs = songs.filter(song => {
         return song.userId === currentProfile.id
-    })    
+    })
 
     return (
-        <div className="songs">
-            <div className="background">
-                <img src=""></img>
+        <div className="profile">
 
-                {<h1>{currentProfile.name}</h1>}
-            </div>
+            <section className="userProfile">
+                <div className="background">
+                    <img id="profilePicture" alt="User's profile picture" src=""></img>
 
+                    {<h1>{currentProfile.name}</h1>}
 
+                    {/* <button className="followButton" value="Follow">Follow</button> */}
+                </div>
+
+            </section>
             <article className="profileSongList">
+                <h3>Songs</h3>
 
                 {currentUserSongs.map(song => <Song key={song.id} song={song} {...props} />)}
 
             </article>
 
-            <div className="player">
-                <img className="profilePicture" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></img>
+            <article id="followers">
+                <h3>Followers</h3>
 
+                {currentUsersFollowers.map(follower => <Follower key={follower.id} follower={follower} {...props} />)}
 
-                <div>
+            </article>
 
-                    }
+            <article id="likedSongs" className="profileLikesList">
 
-</div>
+                <h3>Likes</h3>
 
-                <audio autoPlay id="player">
+                {currentUsersLikes.map(like => <Like key={like.id} like={like} {...props} />)}
 
-                    <source src="" type="audio/mpeg" id="songPlayer" />
-                    Error.
-                </audio>
+            </article>
 
-                <div className="playerWindow">
-                    <button id="pauseButton" onClick={function () {
-                        const player = document.getElementById("player")
-                        if (player.isplaying = true) {
-                            player.pause()
-                        } else if (player.isplaying !== true) {
-                            console.log("das")
-                            player.play()
-                        }
-                    }}>Pause</button>
-                </div>
-            </div>
         </div>
     )
 }

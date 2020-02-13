@@ -24,8 +24,9 @@ export default (props) => {
 
                 <h1>Discover</h1>
             </div>
+
             Search:
-<input type="search"></input>
+            <input type="search" ></input>
 
             <article className="profileSongList">
 
@@ -34,48 +35,13 @@ export default (props) => {
             </article>
 
             <div className="player">
-                <img className="profilePicture" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></img>
+                <img className="profilePicture" src=""></img>
 
+                <article className="usersList">
 
-                <div>
-
-                    }
-
-</div>
-
-
-                <audio autoPlay id="player">
-
-                    <source src="" type="audio/mpeg" id="songPlayer" />
-                    Error.
-                </audio>
-
-
-                <div className="playerWindow">
-
-
-                    <button id="pauseButton" onClick={function () {
-                        const player = document.getElementById("player")
-                        if (player.isplaying = true) {
-                            player.pause()
-                        } else if (player.isplaying !== true) {
-                            console.log("das")
-                            player.play()
-                        }
-
-                    }}>Pause</button>
-
-
-
-
-                </div>
-
-
+                </article>
 
             </div>
-
-
-
         </div>
     )
 }

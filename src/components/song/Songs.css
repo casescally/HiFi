@@ -28,3 +28,12 @@
     height: 200px;
     align-items: center;
 }
+
+.likeSection {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    border: solid black 3px;
+    margin: 1%;
+    padding: 1%;    
+}

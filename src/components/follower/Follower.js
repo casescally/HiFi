@@ -1,20 +1,21 @@
 import React, { useContext } from "react"
-import { FriendContext } from "./FriendProvider"
-import "./Friends.css"
+import { FollowerContext } from "./FollowerProvider"
+import "./Followers.css"
 
-export default ({ friend, match, history }) => {
-    const { friends, deleteFriend } = useContext(FriendContext)
+export default ({ follower, match, history }) => {
+    const { followers, deleteFollower } = useContext(FollowerContext)
  
     return (
-    <section className="friend">
-        <div className="freind__profilePicture"></div>
-        <div className="friend__firstName">{friend.firstName}</div>
-        <div className="friend__firstName">{friend.lastName}</div>
-        <div className="friend__username">{friend.username}</div>
-        <div className="friend__check">{friend.check}</div>
+    <section className="follower">
+        <div className="follower__profilePicture"></div>
+        <div className="follower__name">
+            
+            {follower.name}</div>
+        <div className="follower__username">{follower.username}</div>
+        <div className="follower__check">{follower.check}</div>
         <button className="btn--delete"
                 onClick={() => {
-                deleteFriend(friend)
+                deleteFollower(follower)
                     .then(() => {
                         history.push("/")
                      })

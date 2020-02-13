@@ -4,22 +4,16 @@ import { SongContext } from "./SongProvider"
 import "./Songs.css"
 
 export default (props) => {
+
     const { songs, deleteSong } = useContext(SongContext)
     const { users } = useContext(UserContext)
-
     const chosenSongId = parseInt(props.match.params.songId, 10)
-
     const song = songs.find(s => s.id === chosenSongId) || {}
     const user = users.find(u => u.id === song.userId) || {}
 
     return (
-        <section className="individualSong">
+        <section className="song">
             <h3 className="song__name">{song.name}</h3>
-
-            <audio controls>
-                <source src={`http://localhost:8080/${song.url}`} type="audio/mpeg" />
-                Your browser does not support the audio element.
-            </audio>
 
             <div className="song__user">{user.name}</div>
             <button onClick={

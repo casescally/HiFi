@@ -1,54 +1,49 @@
 import React, { useContext } from "react"
-import { FriendContext } from "./FriendProvider"
+import { FollowerContext } from "../follower/FollowerProvider"
 import { UserContext } from "../user/UserProvider"
-import Friend from "./Friend"
-import "./Friends.css"
+import Follower from "./Follower"
+import "./Followers.css"
 
 export default (props) => {
 
     const { user } = useContext(UserContext)
-    const { friends } = useContext(FriendContext)
-    const relationships = friends.filter(friend => friend.userId === parseInt(localStorage.getItem("currentUser")))
-    const currentUsersFreinds = []
+    const { followers } = useContext(FollowerContext)
+    const relationships = followers.filter(follower => follower.userId === parseInt(localStorage.getItem("currentUser")))
+    const currentUsersFollowers = []
 
-    // const usersFreinds = users.filter(freind => freindsRelationships.freindId === user.id)
-    // freindsRelationships.map(freind => freind.freindId === true)
+    // const usersFrollowers = users.filter(follower => followersRelationships.followerdId === user.id)
+    // followersRelationships.map(follower => follower.followerId === true)
 
     return (
-        <div className="friends">
-            <h1>Friends</h1>
-            <button onClick={() => props.history.push("/friends/create")}>
-                Add Friend
+        <div className="followers">
+            <h1>Followers</h1>
+            <button onClick={() => props.history.push("/followers/create")}>
+                Add Follower
             </button>
-            <article className="friendList">
+            <article className="followerList">
                 
                 {
                     relationships.forEach(rel => {
 
                         // Find this relationships's matching user object
-                        const foundFreind = user.filter(
+                        const foundFollower = user.filter(
                             (singleUser) => {
-                                return rel.freindId === singleUser.id
+                                return rel.followerId === singleUser.id
                             }
                         )[0]
 
-                        currentUsersFreinds.push(foundFreind)
+                        currentUsersFollowers.push(foundFollower)
 
-                        console.log(currentUsersFreinds)
+                        console.log(currentUsersFollowers)
 
                     })
                 }
 
-                {currentUsersFreinds.map(friend => <Friend key={friend.id} friend={friend} {...props}/>)}
+                {currentUsersFollowers.map(follower => <Follower key={follower.id} follower={follower} {...props}/>)}
 
             </article>
-
-            <article>
-                Freind Requests:
-            </article>
-
         </div>
     )
 }
 
-// {users.map(user => <Friend key={friend.id} friend={friend} />)}
+// {users.map(user => <Follower key={follower.id} follower={follower} />)}

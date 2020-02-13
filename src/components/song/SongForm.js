@@ -94,11 +94,11 @@ export default props => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="songCover">Song Cover: </label>
-                    <textarea type="text" name="songCover" className="form-control"
+                    <input type="file" name="songCover" className="form-control"
                         proptype="varchar"
                         value={song.url}
                         onChange={handleControlledInputChange}>
-                    </textarea>
+                    </input>
                 </div>
             </fieldset>
             <button type="submit"
