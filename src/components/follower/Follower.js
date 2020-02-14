@@ -20,7 +20,7 @@ export default ({ follower, match, history }) => {
         <div className="follower__check">{follower.check}</div>
         <button className="btn--delete"
                 onClick={() => {
-                deleteFollower(follower)
+                deleteFollower(follower.id)
                     .then(() => {
                         history.push("/")
                      })

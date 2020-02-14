@@ -46,6 +46,7 @@ export const FollowerProvider = (props) => {
 
     useEffect(() => {
         console.log("****  FOLLOWERS APPLICATION STATE CHANGED  ****")
+        console.log(followers)
     }, [followers])
 
     return (

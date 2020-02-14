@@ -1,7 +1,10 @@
 import React, { useContext, useState, useEffect } from "react"
 import { SongContext } from "./SongProvider"
 import { UserContext } from "../user/UserProvider"
-
+import FileUploader from "react-firebase-file-uploader";
+import * as firebase from "firebase/app";
+import "firebase/storage";
+   
 export default props => {
     const { users } = useContext(UserContext)
     const { addSong, songs, updateSong } = useContext(SongContext)
@@ -19,6 +22,31 @@ export default props => {
         setSong(newSong)
     }
 
+//this is setting the URL for the firebase song
+const [URL, setURL] = useState("");
+//this is the function that is uploading new logos from firebase and adding an image to the json database
+    const songUploader = filename => {
+        console.log("filename", filename);
+        firebase
+          .storage()
+          .ref("songs")
+          .child(filename)
+          .getDownloadURL()
+            .then(firebaseUrl => {
+              setURL(firebaseUrl)
+            //   addSong({
+            //     userId: parseInt(localStorage.getItem("currentUser")),
+            //     url: firebaseUrl,
+            //     name: filename,
+            //     songCoverUrl: "none",
+            //     songDescription: "First song",
+            //     genre: "Rock",
+            //     playCount: 20
+            //   })
+            })
+        }
+
+
     const setDefaults = () => {
         if (editMode) {
             const songId = parseInt(props.match.params.songId)
@@ -34,6 +62,8 @@ export default props => {
     const constructNewSong = () => {
         const userId = parseInt(song.songId)
 
+
+
         if (userId === 0) {
             window.alert("Please select a song")
         } else {
@@ -47,9 +77,12 @@ export default props => {
                 })
                     .then(() => props.history.push("/"))
             } else {
+
+
                 addSong({
                     id: song.id,
                     name: song.name,
+                    url: URL,
                     songDescription: song.description,
                     songCoverUrl: song.url,
                     userId: parseInt(localStorage.getItem("currentUser"))
@@ -85,20 +118,34 @@ export default props => {
                 </div>
             </fieldset>
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="songId">Song: </label>
-                    <input type="file" name="song"></input>
-                    
-                </div>
+
+                <div>
+                <label><img src={URL} /></label>
+                    <FileUploader
+                    accept="/*"
+                    name="song"
+                    filename={file => file.name.split(".")[0]}
+                    storageRef={firebase.storage().ref("songs")}
+                    onUploadSuccess={songUploader}
+                    />
+            </div>
+
             </fieldset>
+
+
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="songCover">Song Cover: </label>
+
+                
+                    
                     <input type="file" name="songCover" className="form-control"
                         proptype="varchar"
-                        value={song.url}
+
                         onChange={handleControlledInputChange}>
                     </input>
+  
+
                 </div>
             </fieldset>
             <button type="submit"

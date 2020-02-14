@@ -24,24 +24,16 @@ export default (props) => {
 
                 <h1>Discover</h1>
             </div>
-
-            Search:
+            <div className="searchBar">
+                Search:
             <input type="search" ></input>
-
+            </div>
             <article className="profileSongList">
 
                 {songs.map(song => <Song key={song.id} song={song} {...props} />)}
 
             </article>
 
-            <div className="player">
-                <img className="profilePicture" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></img>
-
-                <article className="usersList">
-
-                </article>
-
-            </div>
         </div>
     )
 }

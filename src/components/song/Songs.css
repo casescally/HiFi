@@ -6,7 +6,7 @@
     display: flex;
     justify-content: left;
     flex-direction: row;
-    border: solid black 3px;
+    border: solid #003f3f  1px;
     margin: 1%;
     padding: 1%;
 }
@@ -33,7 +33,11 @@
     display: flex;
     justify-content: left;
     flex-direction: row;
-    border: solid black 3px;
+    border: solid #003f3f  3px;
     margin: 1%;
     padding: 1%;    
+}
+
+.profileSongList {
+    border: solid #003f3f  3px;
 }

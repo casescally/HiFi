@@ -8,21 +8,13 @@ import Follower from "../follower/Follower"
 import { LikeContext } from "../likes/LikesProvider"
 import Like from "../likes/Like"
 
-
 export default (props) => {
 
-
-// const { updateSongPlay } = useContext(SongContext)
-
-
-// }
+    const { followers, addFollower } = useContext(FollowerContext)   
     const { songs } = useContext(SongContext)
     const { users } = useContext(UserContext)
-    const { followers } = useContext(FollowerContext)
     const chosenUserId = parseInt(props.match.params.userId, 10)
     const { likes } = useContext(LikeContext)
-    // const song = songs.find(s => s.id === chosenSongId) || {}
-    // const currentUsersProfile = users.find(u => u.id === parseInt(localStorage.getItem("currentUser"))) || {}
     const profilesArray = []
 
     if (chosenUserId !== parseInt(localStorage.getItem("currentUser"))) {
@@ -57,7 +49,7 @@ export default (props) => {
         })
     }
 
-    const relationships = followers.filter(follower => follower.userId == currentProfile.id)
+    const relationships = followers.filter(follower => follower.userId === currentProfile.id)
     const currentUsersFollowers = []
 
     {
@@ -74,10 +66,23 @@ export default (props) => {
         })
     }
 
+    const constructNewFollower = (clickedUser) => {
+
+        const currentFollowers = followers
+        const followedUser = currentFollowers.find(singleUser => singleUser.userId === clickedUser)
+
+            if (followedUser === undefined) {
+
+                addFollower({
+                    "userId": parseInt(localStorage.getItem("currentUser")),
+                    "followerId": clickedUser
+    })
+}}
+    
     const currentUserSongs = songs.filter(song => {
         return song.userId === currentProfile.id
     })
-
+    
     return (
         <div className="profile">
 
@@ -90,16 +95,20 @@ export default (props) => {
                     {/* <button className="followButton" value="Follow">Follow</button> */}
                 </div>
 
-            </section>
+            <button className="followButton" onClick={evt => {
+                        evt.preventDefault()
+                        constructNewFollower(currentProfile.id)
+             }}>Follow</button>
             <article className="profileSongList">
-                <h3>Songs</h3>
+            <h3>Songs {currentUserSongs.length}</h3>
 
                 {currentUserSongs.map(song => <Song key={song.id} song={song} {...props} />)}
 
             </article>
 
             <article id="followers">
-                <h3>Followers</h3>
+
+                <h3>Followers: {currentUsersFollowers.length}</h3>
 
                 {currentUsersFollowers.map(follower => <Follower key={follower.id} follower={follower} {...props} />)}
 
@@ -112,7 +121,7 @@ export default (props) => {
                 {currentUsersLikes.map(like => <Like key={like.id} like={like} {...props} />)}
 
             </article>
-
+            </section>
         </div>
     )
 }
