@@ -12,8 +12,8 @@ export default ({ like }) => {
     const user = users.find(u => u.id === like.userId) || {}
     const currentSongsLikes = likes.filter(l => l.songId === like.id)
     const constructNewLike = (currentSong) => {
-        const alreadyLikedSong = likes.find(like => like.songId === currentSong.id && like.userId === parseInt(localStorage.getItem("currentUser")))
-        const user = users.find(u => u.id === like.userId) || {}
+    const alreadyLikedSong = likes.find(like => like.songId === currentSong.id && like.userId === parseInt(localStorage.getItem("currentUser")))
+    const user = users.find(u => u.id === like.userId) || {}
 
         //Don't allow duplicate likes
         if (alreadyLikedSong === undefined) {

@@ -24,7 +24,6 @@ export default props => {
     //this is setting the URL for the firebase song
     const [URL, setURL] = useState("");
 
-
     const checkURL = () => {
         if (song.url !== undefined && URL === "") {
 
