@@ -7,11 +7,20 @@ export default (props) => {
         <ul className="navbar">
 
             <li className="navbar__item discover">
+                
                 <Link className="navbar__link" to="/">Discover</Link>
             </li>
 
             <li className="navbar__item stream">
                 <Link className="navbar__link" to="/stream">Stream</Link>
+            </li>
+
+            <li className="navbar__item searchBar">
+                Search: <input type="search" ></input>
+            </li>
+
+            <li className="navbar__item profile">
+                <Link className="navbar__link" to={`/users/${parseInt(localStorage.getItem("currentUser"))}`}>Profile</Link>
             </li>
 
             <li className="navbar__item profile">

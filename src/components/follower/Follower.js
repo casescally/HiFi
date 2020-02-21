@@ -2,29 +2,36 @@ import React, { useContext } from "react"
 import { FollowerContext } from "./FollowerProvider"
 import "./Followers.css"
 import { Link } from "react-router-dom"
+// import { fetchDelete } from "./FetchDelete";
 
 export default ({ follower, match, history }) => {
-    const { followers, deleteFollower } = useContext(FollowerContext)
+    const { followers, updateFollower } = useContext(FollowerContext)
+
+    // const currentUser = parseInt(localStorage.getItem("currentUser"))
+    const follow = followers.find(f => f.followerId === follower.id && f.userId === parseInt(localStorage.getItem("currentUser")))
 
     return (
+        
     <section className="follower">
         <div className="follower__profilePicture"></div>
 
         <div className="follower__name">
             
-        <Link to={`/users/${follower.id}`}>
-        {follower.name}
+            <Link to={`/users/${follower.id}`}>
+            {follower.name}
             </Link>
-            
-            </div>
+
+        </div>
+
         <div className="follower__check">{follower.check}</div>
         <button className="btn--delete"
-                onClick={() => {
-                deleteFollower(follower.id)
-                    .then(() => {
-                        history.push("/")
-                     })
-                    }} >Delete
+                onClick={evt => {
+                    evt.preventDefault()
+                    updateFollower(false, follow)
+                        .then(() => {
+                                history.push("/")
+                            })
+                            }} >Unfollow
         </button>
     </section>
 )}

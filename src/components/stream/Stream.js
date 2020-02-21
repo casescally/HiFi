@@ -3,9 +3,14 @@ import { SongContext } from "../song/SongProvider"
 import Song from "../song/Song"
 import "../song/Songs.css"
 import { UserContext } from "../user/UserProvider"
+import { FollowerContext } from "../follower/FollowerProvider"
+
 
 export default (props) => {
 
+
+    const { followers } = useContext(FollowerContext)
+    const currentUsersFollowers = followers.filter(f => f.userId === parseInt(localStorage.getItem("currentUser")) && f.active)
     const { songs } = useContext(SongContext)
     const { users } = useContext(UserContext)
     const chosenSongId = parseInt(props.match.params.songId, 10)
@@ -15,9 +20,36 @@ export default (props) => {
     // const player = document.getElementById("player")
     // const playerWindow = document.getElementById("playerWindow")
     // if (player.src != undefined) {}
-
         return song.userId === parseInt(localStorage.getItem("currentUser"))
     })
+
+
+    // const followerSongs = songs.forEach(song => {
+
+    //         song.userId === currentUsersFollowers.followerId
+    //     })
+
+const streamSongs = []
+
+        {
+            currentUsersFollowers.forEach(follower => {
+    
+                // Find this relationships's matching song object
+                const foundSong = songs.filter(
+                    (singleSong) => {
+                        return follower.followerId === singleSong.userId
+                    }
+                )[0]
+                if (foundSong !== undefined) {
+                streamSongs.push(foundSong)
+            }})
+        }
+
+
+        // streamSongs.push(userSongs)
+
+// console.log(streamSongs)
+
 
     return (
         <div className="songs">
@@ -27,10 +59,11 @@ export default (props) => {
                 {<h1>Stream</h1>}
             </div>
 
+            <article className="streamSongList">
 
-            <article className="profileSongList">
+                {/* {userSongs.map(song => <Song key={song.id} song={song} {...props} />)} */}
 
-                {userSongs.map(song => <Song key={song.id} song={song} {...props} />)}
+                {streamSongs.map(song => <Song key={song.id} song={song} {...props} />)}
 
             </article>
     

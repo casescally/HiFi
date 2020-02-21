@@ -7,30 +7,33 @@ import { FollowerContext } from "../follower/FollowerProvider"
 import Follower from "../follower/Follower"
 import { LikeContext } from "../likes/LikesProvider"
 import Like from "../likes/Like"
+import "./Profiles.css"
 
 export default (props) => {
 
-    const { followers, addFollower } = useContext(FollowerContext)   
+    const { followers, addFollower, updateFollower } = useContext(FollowerContext)
     const { songs } = useContext(SongContext)
     const { users } = useContext(UserContext)
     const chosenUserId = parseInt(props.match.params.userId, 10)
     const { likes } = useContext(LikeContext)
     const profilesArray = []
+    let editProfileMode = Boolean
 
     if (chosenUserId !== parseInt(localStorage.getItem("currentUser"))) {
         let foundProfile = users.find(u => u.id === chosenUserId) || {}
+        editProfileMode = false
         profilesArray.push(foundProfile)
-
-
 
     } else {
         let foundProfile = users.find(u => u.id === parseInt(localStorage.getItem("currentUser"))) || {}
+        editProfileMode = true
         profilesArray.push(foundProfile)
 
     }
 
     const currentProfile = profilesArray[0]
-    const likesRelationships = likes.filter(like => like.userId == currentProfile.id)
+    const currentProfileId = currentProfile.id
+    const likesRelationships = likes.filter(like => like.userId === currentProfile.id)
     const currentUsersLikes = []
 
     {
@@ -49,7 +52,7 @@ export default (props) => {
         })
     }
 
-    const relationships = followers.filter(follower => follower.userId === currentProfile.id)
+    const relationships = followers.filter(follower => follower.userId === currentProfile.id && follower.active === true)
     const currentUsersFollowers = []
 
     {
@@ -68,59 +71,89 @@ export default (props) => {
 
     const constructNewFollower = (clickedUser) => {
 
-        const currentFollowers = followers
-        const followedUser = currentFollowers.find(singleUser => singleUser.userId === clickedUser)
+        const followedUser = followers.filter(singleRel => singleRel.followerId === clickedUser.id)
+        // const currentlyFollowing = followedUser.filter(f => f.active === true)
+        const foundUser = followedUser.find(f => f.userId === parseInt(localStorage.getItem("currentUser")))
 
-            if (followedUser === undefined) {
+        if (foundUser === undefined || followedUser.length === 0) {
+            
+            return addFollower({
 
-                addFollower({
-                    "userId": parseInt(localStorage.getItem("currentUser")),
-                    "followerId": clickedUser
-    })
-}}
-    
+                "userId": parseInt(localStorage.getItem("currentUser")),
+                "followerId": clickedUser.id,
+                "active": true
+
+            })
+
+        } if (foundUser.active === false) {
+
+            return updateFollower(true, foundUser)
+
+        } else if (followedUser === undefined) {
+
+            return alert("Error.")
+            //  addFollower({
+
+            //     "userId": parseInt(localStorage.getItem("currentUser")),
+            //     "followerId": clickedUser.id,
+            //     "active": true
+
+            // })
+        }
+    }
+
     const currentUserSongs = songs.filter(song => {
         return song.userId === currentProfile.id
+
     })
-    
+
     return (
+        
         <div className="profile">
 
             <section className="userProfile">
                 <div className="background">
-                    <img id="profilePicture" alt="User's profile picture" src=""></img>
+                    <img id="profilePicture" className="profilePicture" alt={`${currentProfile.name}'s profile picture`} src={currentProfile.profilePicture}></img>
 
                     {<h1>{currentProfile.name}</h1>}
+
+                    <img id="backgroundCover" className="backgroundCover" alt={`${currentProfile.name}'s background cover`} src={currentProfile.backgroundCover}></img>
 
                     {/* <button className="followButton" value="Follow">Follow</button> */}
                 </div>
 
-            <button className="followButton" onClick={evt => {
+                <button className="followButton" onClick={evt => {
+                    if (editProfileMode) {
                         evt.preventDefault()
-                        constructNewFollower(currentProfile.id)
-             }}>Follow</button>
-            <article className="profileSongList">
-            <h3>Songs {currentUserSongs.length}</h3>
+                        props.history.push(`edit/${currentProfileId}`)
+                    } else if (editProfileMode === false) {
+                        evt.preventDefault()
+                        constructNewFollower(currentProfile)
+                    }
+                }}>{editProfileMode ? "Edit" : "Follow"}</button>
+                
+                <article className="profileSongList">
+                    <h3>Songs {currentUserSongs.length}</h3>
 
-                {currentUserSongs.map(song => <Song key={song.id} song={song} {...props} />)}
+                    {currentUserSongs.map(song => <Song key={song.id} song={song} {...props} />)}
 
-            </article>
+                </article>
 
-            <article id="followers">
+                <article id="followers">
 
-                <h3>Followers: {currentUsersFollowers.length}</h3>
+                    <h3>Following: {currentUsersFollowers.length}</h3>
 
-                {currentUsersFollowers.map(follower => <Follower key={follower.id} follower={follower} {...props} />)}
+                    {currentUsersFollowers.map(follower => <Follower key={follower.id} follower={follower} {...props} />)}
 
-            </article>
+                </article>
 
-            <article id="likedSongs" className="profileLikesList">
+                <article id="likedSongs" className="profileLikesList">
 
-                <h3>Likes</h3>
+                    <h3>Likes</h3>
 
-                {currentUsersLikes.map(like => <Like key={like.id} like={like} {...props} />)}
+                    {currentUsersLikes.map(like => <Like key={like.id} like={like} {...props} />)}
 
-            </article>
+                </article>
             </section>
         </div>
     )

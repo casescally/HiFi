@@ -29,8 +29,8 @@ export const UserProvider = (props) => {
     }, [])
 
     useEffect(() => {
-        console.log("****  USER APPLICATION STATE CHANGED  ****")
-        console.log(users)
+        // console.log("****  USER APPLICATION STATE CHANGED  ****")
+        // console.log(users)
     }, [users])
 
     return (

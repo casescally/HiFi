@@ -1,5 +1,6 @@
 .profilePicture {
-    max-width: 50px;
+    max-width: 100px;
+    max-height: 100px;
 }
 
 .songSection {
@@ -19,6 +20,10 @@
     margin: 1%;
     padding: 1%;
     align-items: center;
+}
+
+.backgroundCover {
+    height: 300px;
 }
 
 .background {

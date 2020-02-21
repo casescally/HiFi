@@ -24,10 +24,7 @@ export default (props) => {
 
                 <h1>Discover</h1>
             </div>
-            <div className="searchBar">
-                Search:
-            <input type="search" ></input>
-            </div>
+
             <article className="profileSongList">
 
                 {songs.map(song => <Song key={song.id} song={song} {...props} />)}

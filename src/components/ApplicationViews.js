@@ -10,6 +10,8 @@ import SongDetails from "./song/SongDetails";
 import Stream from "./stream/Stream";
 import { FollowerProvider } from "./follower/FollowerProvider";
 import Player from "./player/Player"
+import ProfileForm from "./profile/ProfileForm"
+// import Search from "./search/search"
 
 export default props => {
     return (
@@ -39,7 +41,12 @@ export default props => {
                             <Route path="/songs/edit/:songId(\d+)" render={
                                 props => <SongForm {...props} />
                             } />
+
+                            <Route exact path="/users/edit/:userId(\d+)" render={
+                                props => <ProfileForm {...props} />
+                            } />
                             <Player></Player>
+                            {/* <Search></Search> */}
                         </LikeProvider>
                     </UserProvider>
                 </FollowerProvider>

@@ -1,73 +1,83 @@
-import React, { useContext } from "react"
-import "./Songs.css"
+import React, { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 import { LikeContext } from "../likes/LikesProvider"
 import { UserContext } from "../user/UserProvider"
+import "./Songs.css"
 
 export default ({ song }) => {
 
-    const { users } = useContext(UserContext)    
-    const { likes, addLike } = useContext(LikeContext)
-    const currentSongsLikes = likes.filter(like => like.songId == song.id)
-    const constructNewLike = (currentSong) => {
-    const alreadyLikedSong = likes.find(like => like.songId === currentSong && like.userId == parseInt(localStorage.getItem("currentUser")))
+    const { users } = useContext(UserContext)
+    const { likes, addLike, deleteLike } = useContext(LikeContext)
     const user = users.find(u => u.id === song.userId) || {}
+    const currentSongsLikes = likes.filter(like => like.songId === song.id)
+    const constructNewLike = (currentSong) => {
+        const alreadyLikedSong = likes.find(like => like.songId === currentSong.id && like.userId === parseInt(localStorage.getItem("currentUser")))
+        const user = users.find(u => u.id === song.userId) || {}
+
         //Don't allow duplicate likes
-        if (alreadyLikedSong == undefined) {
-        addLike({
-            songId: currentSong,
-            userId: parseInt(localStorage.getItem("currentUser"))
-        })
+        if (alreadyLikedSong === undefined) {
+            likedSongMode = false
+            addLike({
+                songId: currentSong.id,
+                userId: parseInt(localStorage.getItem("currentUser"))
+            })
+        } if (alreadyLikedSong !== undefined) {
+            likedSongMode = true
+            deleteLike(likes.find(like => like.songId === currentSong.id && like.userId === parseInt(localStorage.getItem("currentUser"))))
+        }
     }
-}
 
+    let likedSongMode = Boolean
 
-        return (
-                
-            //song information
-            <section className="songSection">
+    return (
 
-                <button onClick={
-                    function () {
-                        const player = document.getElementById("songPlayer")
-                        const audioPlayer = player.parentElement
-                        player.src = `${song.url}`
-                        audioPlayer.load()
-                    }}>Play
+        //song information
+        <section className="songSection">
+
+            <button onClick={
+                function () {
+                    const player = document.getElementById("songPlayer")
+                    const audioPlayer = player.parentElement
+                    player.src = `${song.url}`
+                    audioPlayer.load()
+                }}>Play
         </button>
 
-                <h3>
+            <img className="coverImage" src={song.songCoverUrl}></img>
+
+            <h3>
                 <Link to={`/users/${song.userId}`}>
 
-<div className="song__user"></div>
-</Link>
-                </h3>
+                    <div className="song__user">{user.name} - </div>
+                </Link>
+            </h3>
 
-                
+            {/* {console.log(currentSongsLikes)} */}
 
-                <h3 className="song__name">
+            <h3 className="song__name">
 
-                    <Link to={`/songs/${song.id}`}>
-                        {song.name}
-                    </Link>
+                <Link to={`/songs/${song.id}`}>
+                    {song.name}
+                </Link>
 
-                    Plays: {song.playCount}
-                    Likes: {currentSongsLikes.length}
-            <button className="likeButton" value="Like" onClick={evt => {
-                        evt.preventDefault()
-                        constructNewLike(song.id)
-                    }
-                    }>Like</button>
+                Plays: {song.playCount}
+                Likes: {currentSongsLikes.length}
+                <button className="likeButton" value="Like" onClick={evt => {
+                    evt.preventDefault()
 
-                    <div className="uploaderInfo">
+                    constructNewLike(song)
+                }
+                }>{likedSongMode ? "Like" : "Unlike"}</button>
 
-                    </div>
+                <div className="uploaderInfo">
 
-                    <div className="songInfo">
-                        {song.songDescription}
-                    </div>
+                </div>
 
-                </h3>
-            </section>
-        )
-    }
+                <div className="songInfo">
+                    {song.songDescription}
+                </div>
+
+            </h3>
+        </section>
+    )
+}

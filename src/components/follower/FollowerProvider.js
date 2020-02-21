@@ -29,7 +29,26 @@ export const FollowerProvider = (props) => {
             .then(getFollowers)
     }
 
+
+    const updateFollower = (currentlyFollowing, follower)=> {
+
+        return fetch(`http://localhost:8088/followers/${follower.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+
+                active: currentlyFollowing
+
+            })
+        })
+            .then(getFollowers)
+      }
+
     const deleteFollower = follower => {
+
+        console.log(follower.id)
         return fetch(`http://localhost:8088/followers/${follower.id}`, {
             method: "DELETE"
         })
@@ -45,13 +64,13 @@ export const FollowerProvider = (props) => {
     }, [])
 
     useEffect(() => {
-        console.log("****  FOLLOWERS APPLICATION STATE CHANGED  ****")
-        console.log(followers)
+        // console.log("****  FOLLOWERS APPLICATION STATE CHANGED  ****")
+        // console.log(followers)
     }, [followers])
 
     return (
         <FollowerContext.Provider value={{
-            followers, addFollower, deleteFollower
+            followers, addFollower, deleteFollower, updateFollower
         }}>
             {props.children}
         </FollowerContext.Provider>

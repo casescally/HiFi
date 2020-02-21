@@ -60,8 +60,8 @@ export const LikeProvider = (props) => {
     }, [])
 
     useEffect(() => {
-        console.log("****  LIKE APPLICATION STATE CHANGED  ****")
-        console.log(likes)
+        // console.log("****  LIKE APPLICATION STATE CHANGED  ****")
+        // console.log(likes)
     }, [likes])
 
     return (

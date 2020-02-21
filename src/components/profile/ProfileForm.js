@@ -1,19 +1,39 @@
-import React, { useRef, useState } from "react"
-import "./Login.css"
+import React, { useRef, useState, useContext, useEffect } from "react"
+import "../auth/Login.css"
 import FileUploader from "react-firebase-file-uploader";
 import * as firebase from "firebase/app";
 import "firebase/storage";
-// import "..song/songs.css"
+import { UserContext } from "../user/UserProvider"
 
-const Register = props => {
+const UpdateProfile = props => {
+    const { users } = useContext(UserContext)
+    const currentUser = users.find(u => u.id === parseInt(localStorage.getItem("currentUser"))) || {}
+    const editMode = props.match.params.hasOwnProperty("userId")
     const firstName = useRef()
     const lastName = useRef()
     const email = useRef()
     const username = useRef()
     const password = useRef()
     const verifyPassword = useRef()
+    // const profilePicture = React.forwardRef((props, ref) => (
+    //     <input ref={ref} className="profilePicture">
+    //       {props.children}
+    //     </input>
+    //   ));
+    //   const ref = React.createRef();
     const [profilePictureURL, setProfilePictureURL] = useState("");
     const [backgroundCoverURL, setBackgroundCoverURL] = useState("");
+    // const currentUserObject = [user, setUser] = useState({})
+
+    // const handleControlledUserInputChange = (event) => {
+    //     /*
+    //         When changing a state object or array, always create a new one
+    //         and change state instead of modifying current one
+    //     */
+    //     const updatedUser = Object.assign({}, user)
+    //     updatedUser[event.target.name] = event.target.value
+    //     setUser(newUser)
+    // } 
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?email=${email.current.value}`)
@@ -32,8 +52,9 @@ const Register = props => {
         if (password.current.value === verifyPassword.current.value) {
             existingUserCheck()
                 .then(() => {
-                    fetch("http://localhost:8088/users", {
-                        method: "POST",
+                    debugger
+                    fetch(`http://localhost:8088/users/${parseInt(localStorage.getItem("currentUser"))}`, {
+                        method: "PUT",
                         headers: {
                             "Content-Type": "application/json"
                         },
@@ -49,7 +70,6 @@ const Register = props => {
                         .then(_ => _.json())
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
-                                localStorage.setItem("currentUser", createdUser.id)
                                 props.history.push("/")
                             }
                         })
@@ -58,7 +78,7 @@ const Register = props => {
             window.alert("Passwords do not match")
         }
     }
-    const profileImageUploader = filename => {
+    const imageUploader = filename => {
         console.log("filename", filename);
         firebase
           .storage()
@@ -82,23 +102,50 @@ const Register = props => {
                 })
             }
 
+        const setDefaults = () => {
+            if (editMode) {
+                const userId = parseInt(props.match.params.userId)
+                const selectedUser = users.find(u => u.id === userId) || {}
+                const selectedProfilePicture = selectedUser.profilePicture
+                const selectedBackgroundCover = selectedUser.backgroundCover
+                setProfilePictureURL(selectedProfilePicture)
+                setBackgroundCoverURL(selectedBackgroundCover)
+            }
+        }
+
+        useEffect(() => {
+            setDefaults()
+        }, [users])
+
+
+        const currentFullName = currentUser.name
+
+        const currentFullNameArray = currentFullName.split(" ")        
+
+
+
+        const currentFirstName = currentFullNameArray[0]
+        const currentLastName = currentFullNameArray[1]
+
     return (
 
         <main style={{ textAlign: "center" }}>
             <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Register to use HiFi</h1>
+                <h1 className="h3 mb-3 font-weight-normal">Update information</h1>
                 <fieldset>
                     <label htmlFor="firstName"> First Name </label>
                     <input ref={firstName} type="text"
                         name="firstName"
                         className="form-control"
                         placeholder="First name"
+                        defaultValue={currentFirstName}
                         required autoFocus />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="lastName"> Last Name </label>
                     <input ref={lastName} type="text"
                         name="lastName"
+                        defaultValue={currentLastName}
                         className="form-control"
                         placeholder="Last name"
                         required />
@@ -107,6 +154,7 @@ const Register = props => {
                     <label htmlFor="inputEmail"> Email address </label>
                     <input ref={email} type="email"
                         name="email"
+                        defaultValue={currentUser.email}
                         className="form-control"
                         placeholder="Email address"
                         required />
@@ -116,6 +164,7 @@ const Register = props => {
                     <input ref={username} type="username"
                         name="username"
                         className="form-control"
+                        defaultValue={currentUser.username}
                         placeholder="Username"
                         required />
                 </fieldset>
@@ -124,6 +173,7 @@ const Register = props => {
                     <input ref={password} type="password"
                         name="password"
                         className="form-control"
+                        defaultValue={currentUser.password}
                         placeholder="Password"
                         required />
                 </fieldset>
@@ -131,6 +181,7 @@ const Register = props => {
                     <label htmlFor="verifyPassword"> Verify Password </label>
                     <input ref={verifyPassword} type="password"
                         name="verifyPassword"
+                        defaultValue={currentUser.password}
                         className="form-control"
                         placeholder="Verify password"
                         required />
@@ -145,11 +196,10 @@ const Register = props => {
                     // ref={profilePictureURL}
                     filename={file => file.name.split(".")[0]}
                     storageRef={firebase.storage().ref("images")}
-                    onUploadSuccess={profileImageUploader}
+                    onUploadSuccess={imageUploader}
                     />
             </div>
             </fieldset>
-
 
             <fieldset>   
                 <div className="backgroundCoverUpload">
@@ -167,7 +217,7 @@ const Register = props => {
 
                 <fieldset>
                     <button type="submit">
-                        Sign in
+                        Submit
                     </button>
                 </fieldset>
             </form>
@@ -175,4 +225,4 @@ const Register = props => {
     )
 }
 
-export default Register
+export default UpdateProfile

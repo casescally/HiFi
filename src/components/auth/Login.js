@@ -5,8 +5,6 @@ import "./Login.css"
 const Login = props => {
     const email = useRef()
     const password = useRef()
-    const customerName = useRef()
-    const address = useRef()
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?email=${email.current.value}`)
@@ -39,8 +37,6 @@ const Login = props => {
                         body: JSON.stringify({
                             email: email.current.value,
                             password: password.current.value,
-                            name: customerName.current.value,
-                            address: address.current.value
                         })
                     })
                         .then(_ => _.json())
