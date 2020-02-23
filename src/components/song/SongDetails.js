@@ -53,6 +53,16 @@ export default (props) => {
     return (
         <section className="song">
 
+
+
+            <img class="detailCoverImage" src={song.songCoverUrl}></img>
+
+            <h3 className="song__name">{song.name}</h3>
+           <Link to={`/users/${song.userId}`}>
+
+                <div className="song__user">{user.name}</div>
+            </Link>
+            
             <button className="playButton" onClick={
                 function () {
                     const player = document.getElementById("songPlayer")
@@ -62,14 +72,7 @@ export default (props) => {
                 }}>Play
         </button>
 
-            <img class="coverImage" src={song.songCoverUrl}></img>
-
-            <h3 className="song__name">{song.name}</h3>
-
-            <Link to={`/users/${song.userId}`}>
-
-                <div className="song__user">{user.name}</div>
-            </Link>
+ 
 
             {renderDeleteButton()}
 

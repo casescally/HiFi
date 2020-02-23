@@ -9,23 +9,50 @@ textarea {
 	color: #404040;
 	font-family: 'Fira Sans', Arial, sans-serif;
 	font-size: 14px;
-	line-height: 1.5;
+  line-height: 1.5;
 }
 
+button{
+  background-color: white;
+  /* border: none; */
+  color: black;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14 px;
+  border: 1px solid#ccc;
+  border-radius: 10px;
+}
+
+
 body {
-  background-color: darkcyan;
+  background-color: white;
+  /* background-image: url(https://firebasestorage.googleapis.com/v0/b/hifi-ed258.appspot.com/o/images%2FambientBackground.jpg?alt=media&token=d5a997e2-2328-4872-8877-0672f14bd1d4);
+  background-repeat:no-repeat;
+  background-size: cover; */
 }
 
 h1,h2,h3,h4,h5,h6 {
   font-family: 'Bree Serif', Arial, sans-serif;
   letter-spacing: 2px;
+}
+
+form {  
+  position: fixed;
+  margin-left: 450px;
+  margin-right: 100px;
+  margin-top: 80px;
   color: white;
+  /* position: absolute; */
+  z-index: -1;
+  text-shadow: 0px 0px 100px white, 2px 2px 10px black;
+  padding-right: 100px;
 }
 
 p {
   margin-bottom: 1.5em;
   color: #d6fcff;
-  color: darkslateblue;
 }
 
 strong {
@@ -40,11 +67,22 @@ address {
   display: flex;
 }
 
-
-form {  
-    position: fixed;
-    margin-left: 450px;
-    margin-right: 100px;
-    margin-top: 80px;
-    color: white;
+a {
+  text-decoration: none;
+   text-shadow: 0 0 100px white, 2px 2px 10px black;
 }
+
+.mainHeading {
+  font-size: 74pt;
+  text-shadow: 0px 0px 10px 100% white, 2px 2px black;
+}
+
+
+
+.link--register {
+  height: 24px;
+  z-index: 1;
+  position: relative;
+  
+}
+

@@ -1,0 +1,89 @@
+.playerWindow {
+    position: fixed;
+    bottom:0px;
+    border: solid #003f3f 3px;
+    margin: 1%;
+    padding: 1%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: row; 
+    border: solid #ccc 3px;
+    background-color: white;
+    width: 95%;
+    border-radius: 10px;
+}
+
+#seekValue {
+    display: none;
+}
+
+#seekSlider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  #seekSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: black;
+    cursor: pointer;
+  }
+  
+  #seekSlider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: black;
+    cursor: pointer;
+  }
+
+  #muteButton {
+      border: 3px solid #ccc;
+  }
+
+  #pauseButton {
+    border: 3px solid #ccc;
+    color: black;
+  }
+
+  /* #volumeSlider {
+	left: 24px;
+	margin: 0 auto;
+	height: 5px;
+	width: 300px;
+	background: #555;
+	border-radius: 15px;
+	
+	.ui-slider-range-min {
+		height: 5px;
+		width: 300px;
+		position: absolute;
+		background: $primary-color;
+		border: none;
+		border-radius: 10px;
+  	outline: none;
+	}
+	
+	.ui-slider-handle {
+		width: 20px;
+  	height: 20px;
+		border-radius: 20px;
+  	background: #FFF;
+  	position: absolute;
+  	margin-left: -8px;
+  	margin-top: -8px;
+  	cursor: pointer;
+  	outline: none;
+	}
+} */

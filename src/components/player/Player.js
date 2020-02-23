@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import "./Player.css"
 
 //object references
 const player = document.getElementById("player")
@@ -83,6 +84,25 @@ export default (props) => {
         // console.log(songPosition)
     }, [songPosition])
 
+    const [songVolume, setSongVolume] = useState()
+
+    const updateSongVolume = (level) => {
+
+        return setSongVolume(level)
+    }
+
+    useEffect(() => {
+        // updateSongPosition()
+        updateSongVolume(setSongVolume)
+    }, [])
+
+    useEffect(() => {
+        // console.log("****  SONG VOLUME STATE CHANGED  ****")
+        // console.log(songVolume)
+    }, [songVolume])
+    
+
+
     return (
 
         <div className="player">
@@ -100,7 +120,7 @@ export default (props) => {
             </audio>
 
                 <div className="playerWindow">
-                    <button id="pauseButton" onClick={() => {
+                    <button id="pauseButton" title="Play/Pause" onClick={() => {
                         const player = document.getElementById("player")
 
                         if (player.paused) {
@@ -108,7 +128,7 @@ export default (props) => {
                         } else {
                             player.pause()
                         }
-                    }}>Play/Pause</button>
+                    }}></button>
 
                     <button id="muteButton" onClick={() => {
                         const player = document.getElementById("player")
@@ -121,25 +141,27 @@ export default (props) => {
                     }}>Mute</button>
 
 
-                    Value: <span id="seekValue"></span>
+                Value: <span id="seekValue">{() => {
+                                        const player = document.getElementById("player")
+                return player.currentTime}}</span>
                     <input id="seekSlider" type="range" min="0" max="100" step="0.1" onMouseDown={() => {
 
                         seeking = true
-                        const updateSongPosition = () => {
-                            console.log("songposition  ****")
-                        }
-                        updateSongPosition()
-                    }} onMouseUp={() => seeking = false} value={songPosition} onClick={() => {
+                        // const updateSongPosition = () => {
+                        //     console.log("**** Song Position Changed  ****")
+                        // }
+                        // updateSongPosition()
+                    }} onMouseUp={() => seeking = false} value={songPosition} onChange={() => {
 
                         //Display the seek value on the screen
                         const player = document.getElementById("player")
                         const slider = document.getElementById("seekSlider")
                         const seekOutput = document.getElementById("seekValue")
-                        seekOutput.innerHTML = player.currentTime
+                        // seekOutput.innerHTML = player.currentTime
                         //Seek through song
                         slider.onchange = () => seekOutput.innerHTML = player.currentTime
                         const seek = (event) => slider.value = event.clientX - slider.offsetLeft
-                        const seekTo = player.duration * (slider.value / 100)
+                        const seekTo = player.duration * (slider.value / 250)
                         //Don't use infinite values
                         if (isFinite(seekTo)) {
                             player.currentTime = seekTo
@@ -150,24 +172,14 @@ export default (props) => {
 
                     Value: <span id="volumeValue"></span>
                     Volume:
-                    <input id="volumeSlider" type="range" min="0" max="100" value={() => {
-                                                const player = document.getElementById("player")
-                                                const volumeSlider = document.getElementById("volumeSlider")
-                        if (player.volume === null) {
-                                // volumeSlider.value === player.volume
-                        }
-                    }} step="0.1" onChange={() => {
+                    <input id="volumeSlider" type="range" min="0" max="100" defaultValue="75" step="1" onChange={() => {
 
                         const player = document.getElementById("player")
                         const volumeSlider = document.getElementById("volumeSlider")
+                        player.volume = Math.min(volumeSlider.value / 100);
                         const volumeOutput = document.getElementById("volumeValue")
-
-                        player.volume = volumeSlider.value / 100
-                        console.log()
-                        volumeSlider.onchange = () => volumeOutput.innerHTML = volumeSlider.value
-
-                        const currentVolume = (event) => volumeSlider.value = event.clientX - volumeSlider.offsetLeft
-                        currentVolume(volumeOutput)
+                        //multiply by floating point value then round to nearest whole number
+                        volumeOutput.innerHTML = Math.floor(player.volume * 100)
                     }}></input>
                 </div>
             </div>

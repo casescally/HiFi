@@ -8,7 +8,7 @@
     flex-basis: 33%;
     margin: 1em;
     padding: 1em;
-    border: 1px solid goldenrod;
+    border: 1px solid #ccc;
     color: white;
 }
 fieldset {
@@ -17,8 +17,17 @@ fieldset {
 }
 
 .follower__profilePicture {
-    background-color: goldenrod;
+    background-color: #ccc;
     height: 100px;
     width: 100px;
 }
 
+.followerName {
+    color: black;
+}
+
+.btn--unfollow {
+    height: -36rem;
+    width: -36rem;
+    border: 3px solid #ccc;
+}

@@ -7,31 +7,35 @@
     display: flex;
     justify-content: left;
     flex-direction: row;
-    border: solid #003f3f  1px;
+    border: solid #ccc 1px;
     margin: 1%;
     padding: 1%;
+    border-radius: 10px;
 }
 
-.player {
-    display: flex;
-    justify-content: center;
-    flex-direction: row; 
-    border: solid #003f3f 3px;
-    margin: 1%;
-    padding: 1%;
-    align-items: center;
+.followButton {
+    width: 5em;
+    /* height: 5em; */
 }
 
 .backgroundCover {
     height: 300px;
+    object-fit: cover;
+    width: 100%;
 }
 
 .background {
     display: flex;
     flex-direction: row;
-    background-color:darkcyan;
+    background-color:white;
     height: 200px;
     align-items: center;
+    text-align: center;
+}
+
+.background img {
+    height: 100%;
+    width: 100%;
 }
 
 .likeSection {
@@ -44,11 +48,15 @@
 }
 
 .profileSongList {
-    border: solid #003f3f  3px;
+    border: solid #ccc  3px;    
+    border-radius: 10px;
+    margin: 1%;
 }
 
 .streamSongList {
-    border: solid #003f3f  3px;  
+    border: solid #ccc 3px;    
+    border-radius: 10px;
+    margin: 1%;
 }
 
 .coverImage {
@@ -62,5 +70,36 @@
     height: 100px;
     width: 100px;
     margin: 1%;
-    background-color: #003f3f;
+    background-color: white;
+}
+
+a {
+    text-shadow: 0 0 100px white, 2px 2px 10px black;
+    color: black;
+ }
+
+ .userProfile {
+    display: flex;
+    flex-direction: column;
+ }
+
+#profileInfo {
+    /* display: inline-block; */
+    /* text-direction: column; */
+    white-space: nowrap;
+    padding: 1%;
+}
+#profileInfo * {
+    display: inline;
+   }
+
+   section.userProfile {
+       display: flex;
+       flex-direction: column;
+       justify-content: space-between;
+   }
+
+div.profileBackground {
+    display: flex;
+    justify-content: space-between;
 }

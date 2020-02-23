@@ -34,7 +34,7 @@ export default ({ like }) => {
 
         <section className="songSection">
 
-            <button onClick={
+            <button className="songPlayButton" onClick={
                 function () {
                     const player = document.getElementById("songPlayer")
                     const audioPlayer = player.parentElement
@@ -61,7 +61,7 @@ export default ({ like }) => {
                     {like.name}
                 </Link>
 
-                Plays: {like.playCount}
+                {/* Plays: {like.playCount} */}
                 Likes: {currentSongsLikes.length}
                 <button className="likeButton" value="Like" onClick={evt => {
                     evt.preventDefault()
@@ -72,10 +72,6 @@ export default ({ like }) => {
 
                 <div className="uploaderInfo">
 
-                </div>
-
-                <div className="songInfo">
-                    {like.songDescription}
                 </div>
 
             </h3>

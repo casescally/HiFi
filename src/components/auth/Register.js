@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react"
-import "./Login.css"
+import "./Register.css"
 import FileUploader from "react-firebase-file-uploader";
 import * as firebase from "firebase/app";
 import "firebase/storage";
@@ -84,7 +84,7 @@ const Register = props => {
 
     return (
 
-        <main style={{ textAlign: "center" }}>
+        <main className="container--register" style={{ textAlign: "center" }}>
             <form className="form--login" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Register to use HiFi</h1>
                 <fieldset>
@@ -135,13 +135,16 @@ const Register = props => {
                         placeholder="Verify password"
                         required />
                 </fieldset>
+<div className="uploadBoxes">
+                <fieldset className="profilePictureUploadField">   
 
-                <fieldset>   
+                <label className="chooseProfilePicture">Choose a profile picture: </label>
                 <div className="profilePictureUpload">
-                <label>Choose a profile picture: <img className="selectProfilePicture" src={profilePictureURL} /></label>
+                <img className="selectProfilePicture" src={profilePictureURL} />
                     <FileUploader
                     accept="/*"
                     name="image"
+                    className="profilePictureUploader"
                     // ref={profilePictureURL}
                     filename={file => file.name.split(".")[0]}
                     storageRef={firebase.storage().ref("images")}
@@ -151,22 +154,26 @@ const Register = props => {
             </fieldset>
 
 
-            <fieldset>   
+            <fieldset className="backgroundCoverUploadField">   
+
+                <label className="chooseBackgroundCover">Choose a background cover: </label>
                 <div className="backgroundCoverUpload">
-                <label>Choose a background cover: <img className="selectBackgroundCover" src={backgroundCoverURL} /></label>
+
                     <FileUploader
                     accept="/*"
                     name="image"
+                    className="backgroundCoverUploader"
                     // ref={profilePictureURL}
                     filename={file => file.name.split(".")[0]}
                     storageRef={firebase.storage().ref("images")}
                     onUploadSuccess={backgroundCoverUploader}
                     />
+                    <img className="selectBackgroundCover" src={backgroundCoverURL} />
             </div>
             </fieldset>
-
+            </div>
                 <fieldset>
-                    <button type="submit">
+                    <button type="submit" id="submitRegistration">
                         Sign in
                     </button>
                 </fieldset>

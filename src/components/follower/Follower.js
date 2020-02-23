@@ -13,18 +13,20 @@ export default ({ follower, match, history }) => {
     return (
         
     <section className="follower">
-        <div className="follower__profilePicture"></div>
+        <div className="follower__profilePicture">
+            <img src={follower.profilePicture} alt="followers profile picture"></img>
+        </div>
 
         <div className="follower__name">
             
-            <Link to={`/users/${follower.id}`}>
+            <Link to={`/users/${follower.id}`} className="followerName">
             {follower.name}
             </Link>
 
         </div>
 
         <div className="follower__check">{follower.check}</div>
-        <button className="btn--delete"
+        <button className="btn--delete" className="btn--unfollow"
                 onClick={evt => {
                     evt.preventDefault()
                     updateFollower(false, follow)

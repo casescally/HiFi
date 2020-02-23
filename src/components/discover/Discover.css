@@ -6,7 +6,7 @@
     display: flex;
     justify-content: left;
     flex-direction: row;
-    border: solid #ccc  1px;
+    border: solid #ccc 1px;
     margin: 1%;
     padding: 1%;
 }
@@ -50,11 +50,12 @@
     background-color: #ccc;
 }
 
-.playButton, .songPlayButton {
+.songPlayButton {
     border-radius: 50%;
-    height: 5em;
-    width: 5em;
     border: 3px solid #ccc;
+    height: 50px;
+    width: 50px;
+    text-indent: -14px;
 }
 
 .song__user {
@@ -67,17 +68,27 @@ form.songForm {
     padding: 1%;
 }
 
+.playButton {
+    border: 2px solid #ccc;
+}
+
 .songLink {
     color: black;
     font-family: 'Fira Sans', Arial, sans-serif;
 }
 
-.likeButton {
-    justify-content: right;
+#discoverTitle {
+    position: relative;
 }
 
-.detailCoverImage {
-    align-content: center;
-    height: 40em;
-}
+/* img.discoverBanner {
+    object-fit: cover;
+    width: 100%;
+} */
 
+.discoverBackground {
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/hifi-ed258.appspot.com/o/images%2FRecordsVinylBG.jpeg?alt=media&token=efd14474-2f28-41c4-be7d-c9a8e92f1317");
+    object-fit: cover;
+    width: 100%;
+    background-position: 0px 800px; 
+}

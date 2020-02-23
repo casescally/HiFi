@@ -1,5 +1,5 @@
 import React, { useRef, useState, useContext, useEffect } from "react"
-import "../auth/Login.css"
+import "./ProfileForm.css"
 import FileUploader from "react-firebase-file-uploader";
 import * as firebase from "firebase/app";
 import "firebase/storage";
@@ -52,7 +52,6 @@ const UpdateProfile = props => {
         if (password.current.value === verifyPassword.current.value) {
             existingUserCheck()
                 .then(() => {
-                    debugger
                     fetch(`http://localhost:8088/users/${parseInt(localStorage.getItem("currentUser"))}`, {
                         method: "PUT",
                         headers: {
@@ -187,8 +186,8 @@ const UpdateProfile = props => {
                         required />
                 </fieldset>
 
-                <fieldset>   
-                <div className="profilePictureUpload">
+                <fieldset className="profilePictureUpload">   
+                <div>
                 <label>Choose a profile picture: <img className="selectProfilePicture" src={profilePictureURL} /></label>
                     <FileUploader
                     accept="/*"
@@ -201,8 +200,8 @@ const UpdateProfile = props => {
             </div>
             </fieldset>
 
-            <fieldset>   
-                <div className="backgroundCoverUpload">
+            <fieldset className="backgroundCoverUpload">   
+                <div>
                 <label>Choose a background cover: <img className="selectBackgroundCover" src={backgroundCoverURL} /></label>
                     <FileUploader
                     accept="/*"
@@ -216,7 +215,7 @@ const UpdateProfile = props => {
             </fieldset>
 
                 <fieldset>
-                    <button type="submit">
+                    <button className="submitButton" type="submit">
                         Submit
                     </button>
                 </fieldset>

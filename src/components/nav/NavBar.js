@@ -23,12 +23,8 @@ export default (props) => {
                 <Link className="navbar__link" to={`/users/${parseInt(localStorage.getItem("currentUser"))}`}>Profile</Link>
             </li>
 
-            <li className="navbar__item profile">
-                <Link className="navbar__link" to={`/users/${parseInt(localStorage.getItem("currentUser"))}`}>Profile</Link>
-            </li>
-
             <li className="navbar__item upload">
-                <button onClick={() => props.history.push("/songs/create")}>
+                <button className="navBarUploadButton" onClick={() => props.history.push("/songs/create")}>
                     Upload Song
                 </button>
             </li>

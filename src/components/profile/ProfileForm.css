@@ -27,13 +27,13 @@ fieldset {
 }
 
 .label--login {
-    width: 8rem;
+    width: 8em;
     display: inline-block;
 }
 
 .form-control {
     display: block;
-    width: 100%;
+    width: 25em;
     height: calc(1.5em + .75rem + 2px);
     padding: .375rem .75rem;
     font-size: 1rem;
@@ -48,10 +48,9 @@ fieldset {
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-.container--login {
+.container--register {
     text-align: center;
-    background-image: url(https://firebasestorage.googleapis.com/v0/b/hifi-ed258.appspot.com/o/images%2Fblaz-photo-headphones.jpg?alt=media&token=963ed8a7-6643-4781-863b-c5a433c5ce98);
-
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://firebasestorage.googleapis.com/v0/b/hifi-ed258.appspot.com/o/images%2Fspeakers.jpg?alt=media&token=b14acfaa-19ac-4777-9862-b9d78b0138b3);
     width: 100vw;
     height: 100vh;
     background-repeat: no-repeat;
@@ -78,3 +77,54 @@ section.link--register {
 /* .background--head {
 
 } */
+
+.selectProfilePicture {
+    max-height: 100px;
+    margin: 1rem;
+    align-content: center;
+}
+
+.profilePictureUpload, .backgroundCoverUpload {
+    height: 36px;
+    width: auto;
+    box-sizing: border-box;
+    border-color: #ccc;
+    display: block; 
+    padding-bottom: 4em;
+    background-color: transparent;
+}
+
+input.profilePictureUpload, .backgroundCoverUpload {
+    background-color: transparent;
+}
+
+.profilePictureUploader, .backgroundCoverUploader {
+    display: flex; 
+    justify-content: center;
+
+
+}
+
+.selectBackgroundCover {
+    max-height: 250px;
+}
+
+
+.uploadBoxes > .profilePictureUpload, .backgroundCoverUpload{
+    display: flex; 
+
+}
+
+.profilePictureUpload, .backgroundCoverUpload {
+border: solid 3px #ccc;
+display: block;
+justify-content: center;
+}
+
+.backgroundCoverUploadField {
+    border: 0px solid transparent;
+}
+
+#submitRegistration {
+    display: block; 
+}

@@ -76,7 +76,7 @@ export default (props) => {
         const foundUser = followedUser.find(f => f.userId === parseInt(localStorage.getItem("currentUser")))
 
         if (foundUser === undefined || followedUser.length === 0) {
-            
+
             return addFollower({
 
                 "userId": parseInt(localStorage.getItem("currentUser")),
@@ -108,30 +108,39 @@ export default (props) => {
     })
 
     return (
-        
+
         <div className="profile">
 
             <section className="userProfile">
-                <div className="background">
-                    <img id="profilePicture" className="profilePicture" alt={`${currentProfile.name}'s profile picture`} src={currentProfile.profilePicture}></img>
 
-                    {<h1>{currentProfile.name}</h1>}
+                <img id="profilePicture" className="profilePicture" alt={`${currentProfile.name}'s profile picture`} src={currentProfile.profilePicture}></img>
 
-                    <img id="backgroundCover" className="backgroundCover" alt={`${currentProfile.name}'s background cover`} src={currentProfile.backgroundCover}></img>
+                <div className="profileBackground" style={{
+                    backgroundImage: "url(" + `${currentProfile.backgroundCover}` + ")",
+                    backgroundPosition: 'center',
+                    // backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat'
+                }}>
+                    <span id="profileInfo">
+                        {<h1>{currentProfile.name}</h1>}
 
-                    {/* <button className="followButton" value="Follow">Follow</button> */}
+                        {/* <img id="backgroundCover" className="backgroundCover" alt={`${currentProfile.name}'s background cover`} src={currentProfile.backgroundCover}></img> */}
+
+                        {/* <button className="followButton" value="Follow">Follow</button> */}
+                        <button className="followButton" onClick={evt => {
+                            if (editProfileMode) {
+                                evt.preventDefault()
+                                props.history.push(`edit/${currentProfileId}`)
+                            } else if (editProfileMode === false) {
+                                evt.preventDefault()
+                                constructNewFollower(currentProfile)
+                            }
+                        }}>{editProfileMode ? "Edit" : "Follow"}</button>
+                    </span>
                 </div>
 
-                <button className="followButton" onClick={evt => {
-                    if (editProfileMode) {
-                        evt.preventDefault()
-                        props.history.push(`edit/${currentProfileId}`)
-                    } else if (editProfileMode === false) {
-                        evt.preventDefault()
-                        constructNewFollower(currentProfile)
-                    }
-                }}>{editProfileMode ? "Edit" : "Follow"}</button>
-                
+
+
                 <article className="profileSongList">
                     <h3>Songs {currentUserSongs.length}</h3>
 

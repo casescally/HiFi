@@ -56,11 +56,11 @@ export default ({ song }) => {
 
             <h3 className="song__name">
 
-                <Link to={`/songs/${song.id}`}>
+                <Link to={`/songs/${song.id}`} className="songLink">
                     {song.name}
                 </Link>
-
-                Plays: {song.playCount}
+{/* 
+                Plays: {song.playCount} */}
                 Likes: {currentSongsLikes.length}
                 <button className="likeButton" value="Like" onClick={evt => {
                     evt.preventDefault()
@@ -71,10 +71,6 @@ export default ({ song }) => {
 
                 <div className="uploaderInfo">
 
-                </div>
-
-                <div className="songInfo">
-                    {song.songDescription}
                 </div>
 
             </h3>

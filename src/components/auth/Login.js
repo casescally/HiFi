@@ -49,11 +49,13 @@ const Login = props => {
     }
 
     return (
+        
         <main className="container--login">
+            <div className="background--head">
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>HiFi</h1>
-                    <h2>Please sign in</h2>
+                    <h1 className="mainHeading">HiFi</h1>
+                    <h2>Sign in</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
                         <input ref={email} type="email"
@@ -77,9 +79,12 @@ const Login = props => {
                     </fieldset>
                 </form>
             </section>
+            </div>
+
             <section className="link--register">
-                <Link to="/register">Not a member yet?</Link>
+                <Link to="/register">Create account</Link>
             </section>
+
         </main>
     )
 }
