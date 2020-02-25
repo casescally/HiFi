@@ -18,16 +18,13 @@ export default (props) => {
     return (
         <div className="songs">
 
-
             <div className="discoverBackground">
-                <h1 id="discoverTitle">Discover</h1>
-{/* 
-                <img className="discoverBanner" src="https://firebasestorage.googleapis.com/v0/b/hifi-ed258.appspot.com/o/images%2FRecordsVinylBG.jpeg?alt=media&token=efd14474-2f28-41c4-be7d-c9a8e92f1317"></img> */}
 
+                <h1 id="discoverTitle">Discover</h1>
 
             </div>
 
-            <article className="profileSongList">
+            <article className="discoverSongList">
 
                 {songs.map(song => <Song key={song.id} song={song} {...props} />)}
 

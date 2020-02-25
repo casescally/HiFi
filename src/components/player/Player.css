@@ -1,8 +1,8 @@
 .playerWindow {
     position: fixed;
     bottom:0px;
-    border: solid #003f3f 3px;
-    margin: 1%;
+    border: solid #ccc 3px;
+    /* margin: 1%; */
     padding: 1%;
     align-items: center;
     display: flex;
@@ -12,15 +12,35 @@
     background-color: white;
     width: 95%;
     border-radius: 10px;
+    z-index: 10;
+    align-content: center;
+    height: 5em;
+    padding: 1.5%;
+    justify-content: center;
+    margin: 1%;
 }
 
 #seekValue {
     display: none;
 }
 
+#volumeLevel {
+display: flex;
+float: left;
+position: absolute;
+left: 83%;
+/* Prevent text selection */
+-webkit-touch-callout: none; /* iOS Safari */
+-webkit-user-select: none; /* Safari */
+-khtml-user-select: none; /* Konqueror HTML */
+-moz-user-select: none; /* Old versions of Firefox */
+-ms-user-select: none; /* Internet Explore & Edge */
+user-select: none; /* Chrome, Opera and Firefox */
+}
+
 #seekSlider {
     -webkit-appearance: none;
-    width: 100%;
+    width: 50%;
     height: 15px;
     border-radius: 5px;  
     background: #d3d3d3;
@@ -49,11 +69,11 @@
   }
 
   #muteButton {
-      border: 3px solid #ccc;
+    border: none;
   }
 
   #pauseButton {
-    border: 3px solid #ccc;
+    border: none;
     color: black;
   }
 
@@ -87,3 +107,43 @@
   	outline: none;
 	}
 } */
+
+#volumeSlider {
+    -webkit-appearance: none;
+    width: 5rem;
+    height: 15px;
+    border-radius: 5px;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    transform: rotate(-90deg);
+    /* bottom: 10em; */
+    /* align-self: flex-end; */
+    justify-content: center;
+  }
+  
+  #volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: black;
+    cursor: pointer;
+  }
+  
+  #volumeSlider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: black;
+    cursor: pointer;
+  }
+
+.muteButtonIcon {
+    height: 3.40em;
+    width: 3.20em;
+    margin: 1%;
+}

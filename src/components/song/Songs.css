@@ -2,14 +2,43 @@
     max-width: 50px;
 }
 
-.songSection {
+.songSection, .likeSection {
     display: flex;
-    justify-content: left;
     flex-direction: row;
     border: solid #ccc  1px;
     margin: 1%;
     padding: 1%;
+    justify-items: stretch;
+    align-content: space-between;
+    justify-content: space-between;
 }
+
+.songLike {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.songInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.likeInfo {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Fira Sans', Arial, sans-serif;
+    font-size: 14px;
+    padding-left: inherit;
+    /* justify-content: flex-end; */
+    padding-right: 10%;
+    /* text-align: left; */
+    align-content: flex-end;
+    text-align: center;
+}
+
 
 .background {
     display: flex;
@@ -19,17 +48,9 @@
     align-items: center;
 }
 
-.likeSection {
-    display: flex;
-    justify-content: left;
-    flex-direction: row;
-    border: solid #ccc 3px;
-    margin: 1%;
-    padding: 1%;    
-}
-
 .profileSongList {
     border: solid #ccc 3px;
+
 }
 
 .streamSongList {
@@ -40,6 +61,9 @@
     display: flex;
     height: 100px;
     margin: 1%;
+    object-fit: contain;
+    height: 100px;
+    width: 100px;
 }
 
 .selectImage {
@@ -54,26 +78,21 @@
     border-radius: 50%;
     height: 5em;
     width: 5em;
-    border: 3px solid #ccc;
 }
 
-.song__user {
+.song__user, .songLink {
     font-family: 'Fira Sans', Arial, sans-serif;
-    color: black
+    color: black;
+    text-shadow: 0 0 0px white, 0px 0px 0px black;
+    display: inline;
+    white-space: nowrap;
 }
 
 form.songForm {
     border: 2px solid #ccc;
     padding: 1%;
-}
-
-.songLink {
     color: black;
-    font-family: 'Fira Sans', Arial, sans-serif;
-}
-
-.likeButton {
-    justify-content: right;
+    text-shadow: 0px 0px 0px white, 0px 0px 0px black;
 }
 
 .detailCoverImage {
@@ -81,3 +100,64 @@ form.songForm {
     height: 40em;
 }
 
+.playButtonIcon {
+    height: 3em;
+    width: 3em;
+    margin: 1%;
+}
+
+button.songPlayButton {
+    border: transparent;
+    padding: 1%;
+}
+
+.songSection {
+    display: inline;
+}
+
+.songLink {
+    display: inline-block;
+}
+
+.songDetailsMain {
+    display: flex;
+    flex-direction: row;
+}
+
+.detailCoverImage {
+    object-fit: contain;
+    width: 100%;
+    height: 25em;
+}
+
+.coverImage {
+    border-radius: 10px;
+}
+
+section.songSection {
+    padding: 0%;
+}
+
+.likeButton {
+    width: 5em;
+    margin: 10%;
+}
+
+.profileBackground {
+    padding-left: 1%;
+    margin-left: 1%;
+    align-content: center;
+}
+
+#followers, #likedSongsList {
+    overflow-x: auto; height: 50%;
+    overflow: scroll;
+}
+
+.songPlayButton {
+   margin-left: 10px;
+}
+
+.songUploader {
+    padding-right: 5em;
+}

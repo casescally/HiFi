@@ -101,8 +101,6 @@ export default (props) => {
         // console.log(songVolume)
     }, [songVolume])
     
-
-
     return (
 
         <div className="player">
@@ -111,8 +109,8 @@ export default (props) => {
 
                 <audio autoPlay id="player" onTimeUpdate={() => {
                     const player = document.getElementById("player")
-                    const time = player.currentTime
-
+                    const time = player.currentTime / 2
+                    // console.log(time)
                     updateSongPosition(time)
                 }}>
                     <source src="" type="audio/mpeg" id="songPlayer" />
@@ -128,7 +126,9 @@ export default (props) => {
                         } else {
                             player.pause()
                         }
-                    }}></button>
+                    }}>
+                        <img className="playButtonIcon" src="https://firebasestorage.googleapis.com/v0/b/hifi-ed258.appspot.com/o/images%2FPlayButton3.png?alt=media&token=16374b88-23e6-4c1a-843a-ed22878773f2" alt="playButtonIcon"></img>
+                    </button>
 
                     <button id="muteButton" onClick={() => {
                         const player = document.getElementById("player")
@@ -138,13 +138,17 @@ export default (props) => {
                         } else {
                             player.muted = true
                         }
-                    }}>Mute</button>
+                    }}><img className="muteButtonIcon" src="https://firebasestorage.googleapis.com/v0/b/hifi-ed258.appspot.com/o/images%2FmuteButtonColored.png?alt=media&token=f39ce46e-c695-4415-b086-5a1ce26769da" alt="muteButtonIcon"></img></button>
 
+                {/* <div id="playerTime">{() => {
+                const player = document.getElementById("player")
+                
+                return console.log(player.currentTime)}}</div> */}
 
-                Value: <span id="seekValue">{() => {
+                <span id="seekValue">{() => {
                                         const player = document.getElementById("player")
                 return player.currentTime}}</span>
-                    <input id="seekSlider" type="range" min="0" max="100" step="0.1" onMouseDown={() => {
+                    <input id="seekSlider" type="range" min="0" max="100" step="1" onMouseDown={() => {
 
                         seeking = true
                         // const updateSongPosition = () => {
@@ -161,7 +165,7 @@ export default (props) => {
                         //Seek through song
                         slider.onchange = () => seekOutput.innerHTML = player.currentTime
                         const seek = (event) => slider.value = event.clientX - slider.offsetLeft
-                        const seekTo = player.duration * (slider.value / 250)
+                        const seekTo = player.duration * (slider.value / 100)
                         //Don't use infinite values
                         if (isFinite(seekTo)) {
                             player.currentTime = seekTo
@@ -170,8 +174,9 @@ export default (props) => {
                         slider.onchange(slider.value = player.currentTime)
                     }}></input>
 
-                    Value: <span id="volumeValue"></span>
-                    Volume:
+                    <span id="volumeLevel">Volume:
+                    <span id="volumeValue"></span>
+                    </span>
                     <input id="volumeSlider" type="range" min="0" max="100" defaultValue="75" step="1" onChange={() => {
 
                         const player = document.getElementById("player")
@@ -179,7 +184,7 @@ export default (props) => {
                         player.volume = Math.min(volumeSlider.value / 100);
                         const volumeOutput = document.getElementById("volumeValue")
                         //multiply by floating point value then round to nearest whole number
-                        volumeOutput.innerHTML = Math.floor(player.volume * 100)
+                        volumeOutput.innerHTML = ' ' + Math.floor(player.volume * 100)
                     }}></input>
                 </div>
             </div>

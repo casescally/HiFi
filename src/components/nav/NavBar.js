@@ -15,9 +15,9 @@ export default (props) => {
                 <Link className="navbar__link" to="/stream">Stream</Link>
             </li>
 
-            <li className="navbar__item searchBar">
-                Search: <input type="search" ></input>
-            </li>
+            {/* <li className="navbar__item searchBar">
+               <input type="search" placeholder="Search"></input>
+            </li> */}
 
             <li className="navbar__item profile">
                 <Link className="navbar__link" to={`/users/${parseInt(localStorage.getItem("currentUser"))}`}>Profile</Link>

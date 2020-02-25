@@ -13,9 +13,8 @@ export default ({ follower, match, history }) => {
     return (
         
     <section className="follower">
-        <div className="follower__profilePicture">
-            <img src={follower.profilePicture} alt="followers profile picture"></img>
-        </div>
+
+            <img className="follower__profilePicture" src={follower.profilePicture} alt="followers profile picture"></img>
 
         <div className="follower__name">
             

@@ -10,6 +10,7 @@
     padding: 1em;
     border: 1px solid #ccc;
     color: white;
+    border-radius: 10px;
 }
 fieldset {
     margin: 0.5rem 0;
@@ -24,10 +25,22 @@ fieldset {
 
 .followerName {
     color: black;
+    text-shadow: 0 0 0px white, 0px 0px 0px black;
 }
 
 .btn--unfollow {
     height: -36rem;
     width: -36rem;
     border: 3px solid #ccc;
+}
+
+.follower__profilePicture {
+    object-fit: cover;
+    height: 10em;
+    width: 10em;
+    border-radius: 10px;
+}
+
+.follower {
+    align-content: center;
 }

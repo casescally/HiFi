@@ -54,23 +54,28 @@ export default (props) => {
         <section className="song">
 
 
-
             <img class="detailCoverImage" src={song.songCoverUrl}></img>
 
-            <h3 className="song__name">{song.name}</h3>
-           <Link to={`/users/${song.userId}`}>
-
-                <div className="song__user">{user.name}</div>
-            </Link>
-            
+    
+    <div className="songDetailsMain">
             <button className="playButton" onClick={
                 function () {
                     const player = document.getElementById("songPlayer")
                     const audioPlayer = player.parentElement
                     player.src = `${song.url}`
                     audioPlayer.load()
-                }}>Play
+                }}><img className="playButtonIcon" src="https://firebasestorage.googleapis.com/v0/b/hifi-ed258.appspot.com/o/images%2FPlayButton3.png?alt=media&token=16374b88-23e6-4c1a-843a-ed22878773f2" alt="playButtonIcon"></img>
         </button>
+
+
+</div>
+            <h3 className="song__name">{song.name}</h3>
+           <Link to={`/users/${song.userId}`}>
+
+                <div className="song__user">{user.name}</div>
+            </Link>
+
+
 
  
 

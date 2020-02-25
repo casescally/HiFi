@@ -113,16 +113,24 @@ export default (props) => {
 
             <section className="userProfile">
 
-                <img id="profilePicture" className="profilePicture" alt={`${currentProfile.name}'s profile picture`} src={currentProfile.profilePicture}></img>
-
                 <div className="profileBackground" style={{
                     backgroundImage: "url(" + `${currentProfile.backgroundCover}` + ")",
                     backgroundPosition: 'center',
                     // backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat'
+                    backgroundRepeat: 'no-repeat',
+                    objectFit: 'contain',
+                    maxwidth: '100%'
                 }}>
+
+
+                    
                     <span id="profileInfo">
-                        {<h1>{currentProfile.name}</h1>}
+
+                <img id="profilePicture" className="profilePicture" alt={`${currentProfile.name}'s profile picture`} src={currentProfile.profilePicture}></img>
+
+
+
+                        {<h1 className="currentProfileName">{currentProfile.name}</h1>}
 
                         {/* <img id="backgroundCover" className="backgroundCover" alt={`${currentProfile.name}'s background cover`} src={currentProfile.backgroundCover}></img> */}
 
@@ -141,12 +149,15 @@ export default (props) => {
 
 
 
+<div className="mainProfileSection">
                 <article className="profileSongList">
-                    <h3>Songs {currentUserSongs.length}</h3>
+                    <h3>Songs: {currentUserSongs.length}</h3>
 
                     {currentUserSongs.map(song => <Song key={song.id} song={song} {...props} />)}
 
                 </article>
+
+<div className="profileSidebar">
 
                 <article id="followers">
 
@@ -163,6 +174,9 @@ export default (props) => {
                     {currentUsersLikes.map(like => <Like key={like.id} like={like} {...props} />)}
 
                 </article>
+</div>
+
+                </div>
             </section>
         </div>
     )

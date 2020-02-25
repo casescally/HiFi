@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { SongContext } from "../song/SongProvider"
 import Song from "../song/Song"
-import "../song/Songs.css"
+import "./Stream.css"
 import { UserContext } from "../user/UserProvider"
 import { FollowerContext } from "../follower/FollowerProvider"
 
@@ -53,10 +53,11 @@ const streamSongs = []
 
     return (
         <div className="songs">
-            <div className="background">
-                <img src=""></img>
 
-                {<h1>Stream</h1>}
+            <div className="streamBackground">
+
+                <h1 id="streamTitle">Stream</h1>
+
             </div>
 
             <article className="streamSongList">

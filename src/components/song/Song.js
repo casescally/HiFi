@@ -33,22 +33,27 @@ export default ({ song }) => {
 
         //song information
         <section className="songSection">
-
-            <button onClick={
+<div className="songInfo">
+            <button className="songPlayButton" onClick={
                 function () {
                     const player = document.getElementById("songPlayer")
                     const audioPlayer = player.parentElement
                     player.src = `${song.url}`
                     audioPlayer.load()
-                }}>Play
+                }}><img className="playButtonIcon" src="https://firebasestorage.googleapis.com/v0/b/hifi-ed258.appspot.com/o/images%2FPlayButton3.png?alt=media&token=16374b88-23e6-4c1a-843a-ed22878773f2" alt="playButtonIcon"></img>
         </button>
-
             <img className="coverImage" src={song.songCoverUrl}></img>
+
+
+
+
+
+<div className="songUploader">
 
             <h3>
                 <Link to={`/users/${song.userId}`}>
 
-                    <div className="song__user">{user.name} - </div>
+                    <div className="song__user">{user.username}</div>
                 </Link>
             </h3>
 
@@ -59,8 +64,13 @@ export default ({ song }) => {
                 <Link to={`/songs/${song.id}`} className="songLink">
                     {song.name}
                 </Link>
-{/* 
-                Plays: {song.playCount} */}
+
+  </h3>
+
+  </div>
+</div>
+                <div className="likeInfo">
+
                 Likes: {currentSongsLikes.length}
                 <button className="likeButton" value="Like" onClick={evt => {
                     evt.preventDefault()
@@ -69,11 +79,18 @@ export default ({ song }) => {
                 }
                 }>{likedSongMode ? "Like" : "Unlike"}</button>
 
+
+
+
+</div>
+
+
+
                 <div className="uploaderInfo">
 
                 </div>
 
-            </h3>
+          
         </section>
     )
 }

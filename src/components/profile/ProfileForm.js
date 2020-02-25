@@ -129,7 +129,7 @@ const UpdateProfile = props => {
     return (
 
         <main style={{ textAlign: "center" }}>
-            <form className="form--login" onSubmit={handleRegister}>
+            <form className="form--updateProfile" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Update information</h1>
                 <fieldset>
                     <label htmlFor="firstName"> First Name </label>
@@ -186,9 +186,13 @@ const UpdateProfile = props => {
                         required />
                 </fieldset>
 
-                <fieldset className="profilePictureUpload">   
-                <div>
-                <label>Choose a profile picture: <img className="selectProfilePicture" src={profilePictureURL} /></label>
+                <div className="uploadBoxes">
+
+                <fieldset className="profilePictureUploadField">   
+
+                <label className="chooseProfilePicture">Choose a profile picture:</label> 
+                          <div className="profilePictureUpload">      
+                <img className="selectProfilePicture" src={profilePictureURL} />
                     <FileUploader
                     accept="/*"
                     name="image"
@@ -200,9 +204,9 @@ const UpdateProfile = props => {
             </div>
             </fieldset>
 
-            <fieldset className="backgroundCoverUpload">   
-                <div>
-                <label>Choose a background cover: <img className="selectBackgroundCover" src={backgroundCoverURL} /></label>
+            <fieldset className="backgroundCoverUploadField">   
+                <div className="backgroundCoverUpload">
+                <label className="chooseBackgroundCover">Choose a background cover: <img className="selectBackgroundCover" src={backgroundCoverURL} /></label>
                     <FileUploader
                     accept="/*"
                     name="image"
@@ -213,7 +217,7 @@ const UpdateProfile = props => {
                     />
             </div>
             </fieldset>
-
+        </div>
                 <fieldset>
                     <button className="submitButton" type="submit">
                         Submit

@@ -1,15 +1,18 @@
 .navbar {
     position: fixed;
-    display: block;
+    /* display: block; */
     top: 0px;
     align-items: center;
     display: flex;
-    justify-content: center;
     flex-direction: row;
     border: solid #ccc 3px;
     background-color: white;
     width: 95%;
     border-radius: 10px;
+    z-index: 10;
+    padding: 1%;
+    margin: 1%;
+
 }
 
 .navbar__item {
@@ -22,4 +25,21 @@
     cursor: pointer;
     border: 1px solid #ccc;
     background-color: white;
+}
+
+.navbar__link {
+    color: black;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    text-shadow: 0 0 0px white, 0px 0px 0px black;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.searchBar {
+    border: 1px solid #ccc;
+    border-radius: 10px;
 }
