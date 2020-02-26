@@ -9,14 +9,14 @@ Install JSON Server
 `npm install -g json-server`
 
 Create a db.json file with these resources
-`
+```
 {
   "users": [],
   "songs": [],
   "likes":[],
   "followers": []
 }
-`
+```
 
 Start JSON Server
 
